@@ -58,7 +58,16 @@
   </default>
   <worldbody>
     <body name="body" pos="0 0 -0.7">
-      <camera mode="fixed" name="frontview" pos="0.42 0 0.0" quat="0.5 0.5 -0.5 -0.5" fovy="75"/>
+      <camera mode="fixed" name="frontview" pos="0.45 0 0.0" quat="0.5 0.5 -0.5 -0.5" fovy="75"/>
+      <body name="lidar" pos="0.45 0 0.0" quat="0.7046993 -0.0615712 0.0616202 -0.7041384">
+        <inertial pos="0 0 0" mass="0.05" diaginertia="1e-4 1e-4 1e-4"/>
+        <site name="lidar_site" pos="0 0 0" size="0.01" rgba="0 0 0 0"/>
+        <replicate count="90" euler="0 0 0.03488">
+          <replicate count="5" euler="0 -0.08722 0">
+            <site name="rf" pos="0 0 0" size="0.005" zaxis="1 0 0" rgba="0 0 0 0"/>
+          </replicate>
+        </replicate>
+      </body>
       <freejoint/>
       <inertial pos="0.0063944 -9.81216e-05 0.000911379" mass="32.86" diaginertia="0.13144 0.13144 0.13144"/>
       <geom mesh="body_0" material="BlackAbs" class="spot_visual"/>
@@ -188,4 +197,7 @@
     <motor class="spot" name="hl_hy_leg" joint="hl_hy_leg_joint"/>
     <motor class="spot" name="hl_kn_leg" joint="hl_kn_leg_joint"/>
   </actuator>
+  <sensor>
+    <rangefinder site="rf" />
+  </sensor>
 </mujoco>

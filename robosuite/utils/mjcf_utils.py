@@ -900,7 +900,10 @@ def get_ids(sim, elements, element_type="geom", inplace=False):
         elif element_type == "body":
             elements = sim.model.body_name2id(elements)
         else:  # site
-            elements = sim.model.site_name2id(elements)
+            try:
+                elements = sim.model.site_name2id(elements)
+            except ValueError:
+                pass
     elif isinstance(elements, dict):
         # Iterate over each element in dict and recursively repeat
         for name, ele in elements:
